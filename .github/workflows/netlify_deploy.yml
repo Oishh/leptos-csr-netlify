@@ -3,7 +3,7 @@ name: Build and Deploy to Netlify
 on:
   push:
     branches: 
-      - master
+      - main
   pull_request:
 jobs:
   build:
@@ -45,7 +45,7 @@ jobs:
         uses: nwtgck/actions-netlify@v3.0
         with:
           publish-dir: './dist'
-          production-branch: master
+          production-branch: main
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message: "Deploy from GitHub Actions"
           enable-pull-request-comment: false
