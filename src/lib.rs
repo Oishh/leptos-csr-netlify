@@ -17,7 +17,7 @@ pub fn App() -> impl IntoView {
     provide_meta_context();
 
     view! {
-        <Html lang="en" dir="ltr" attr:data-theme="light"/>
+        <Html lang="en" dir="ltr" attr:data-theme="darkpurple"/>
 
         // sets the document title
         <Title text="Welcome to Leptos CSR"/>
@@ -27,10 +27,14 @@ pub fn App() -> impl IntoView {
         <Meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <Router>
-            <Routes>
-                <Route path="/" view=Home/>
-                <Route path="/*" view=NotFound/>
-            </Routes>
+            <main class="font-poppins">
+                <Routes>
+                    <Route path="/" view=Home/>
+                    // <Route path="/login" view=PageManager/>
+                    // <Route path="/quotes/builder" view=PageManager/>
+                    <Route path="/*" view=NotFound/>
+                </Routes>
+            </main>
         </Router>
     }
 }
