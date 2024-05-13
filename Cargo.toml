@@ -21,6 +21,8 @@ chrono = "0.4.38"
 reqwest = { version = "0.12.4", features = ["json"] }
 web-sys = "0.3.69"
 serde_urlencoded = "0.7.1"
+dotenvy = "0.15.7"
+dotenvy_macro = "0.15.7"
 
 # utils
 # strum = { version = "0.25", features = ["derive", "strum_macros"] }
