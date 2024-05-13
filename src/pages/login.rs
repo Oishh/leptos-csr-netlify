@@ -6,7 +6,13 @@ use crate::{models::login::{DirectusLoginRequest, DirectusLoginResponse}, utilit
 #[allow(non_snake_case)]
 #[component]
 pub fn Login() -> impl IntoView {
-    let url_env = option_env!("DIRECTUSURL");
+    let url_env = move || {
+        if let Ok(data) = std::env::var("DIRECTUSURL") {
+            data
+        } else {
+            "No variable found.".to_string()
+        }
+    };
     view! {
         <div class="h-full lg:grid lg:grid-cols-3">
             <div class="h-full flex items-center justify-center px-4">
@@ -24,7 +30,7 @@ pub fn Login() -> impl IntoView {
                             <span class="font-bold">" digital assets"</span>
                         </h1>
                     </div>
-                    <p class="mt-4">{url_env}</p>
+                    <p class="mt-4">{url_env()}</p>
                     <p class="mt-4">A tailored solution for your investment thesis.</p>
                 </div>
             </div>
@@ -160,13 +166,19 @@ pub fn LoginIsland() -> impl IntoView {
 
 
 pub async fn directus_login(userid: String, password: String) -> Result<bool, ServerFnError> {
-    let url = option_env!("DIRECTUSURL");
+    let url = move || {
+        if let Ok(data) = std::env::var("DIRECTUSURL") {
+            data
+        } else {
+            "No variable found.".to_string()
+        }
+    };
     // let url = if let Ok(var) = std::env::var("DIRECTUSURL") {
     //     var
     // } else {
     //     "".to_string()
     // };
-    let path = format!("{}/auth/login", url.unwrap_or_default());
+    let path = format!("{}/auth/login", url());
     let email = userid.clone();
     let login_request = DirectusLoginRequest::new(userid.into(), password.into());
     let response = call_and_parse::<DirectusLoginRequest, DirectusLoginResponse>(
