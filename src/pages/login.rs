@@ -6,6 +6,7 @@ use crate::{models::login::{DirectusLoginRequest, DirectusLoginResponse}, utilit
 #[allow(non_snake_case)]
 #[component]
 pub fn Login() -> impl IntoView {
+    let url_env = option_env!("DIRECTUSURL");
     view! {
         <div class="h-full lg:grid lg:grid-cols-3">
             <div class="h-full flex items-center justify-center px-4">
@@ -23,6 +24,7 @@ pub fn Login() -> impl IntoView {
                             <span class="font-bold">" digital assets"</span>
                         </h1>
                     </div>
+                    <p class="mt-4">{url_env}</p>
                     <p class="mt-4">A tailored solution for your investment thesis.</p>
                 </div>
             </div>
